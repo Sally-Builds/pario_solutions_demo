@@ -38,7 +38,6 @@ const multerFilterImage = (req: Request, file:any, cb:any) => {
   ])
 
   const addFileToReqBody = (req: Request, res:Response, next:NextFunction) => {
-    console.log((req as any).files.videos)
     let videos: string[] = []
     let images: string[] = []
 
