@@ -22,6 +22,28 @@ class ApartmentService {
         }
     }
    
+    public async getAll (): Promise<Apartment[] | Error> {
+        try {
+            const apartments = await this.ApartmentModel.find()
+
+            return apartments
+        } catch (error:any) {
+            throw new Error(error)
+        }
+    }
+
+    public async get (id: string): Promise<Apartment | Error> {
+        try {
+            const apartment = await this.ApartmentModel.findById(id)
+
+            if(!apartment) throw new Error('apartment not found') 
+
+            return apartment
+        } catch (error:any) {
+            throw new Error(error)
+        }
+    }
+
     /**
      * 
      * @param data - apartment details to update

@@ -7,7 +7,7 @@ const create = Joi.object({
     country: Joi.string().required(),
     district: Joi.string().required(),
     state: Joi.string().required(),
-    postalCode: Joi.string(),
+    postalCode: Joi.number(),
 })
 
 export default {create}
