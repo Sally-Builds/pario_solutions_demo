@@ -7,10 +7,17 @@ import validate from './review.validation'
 import authenticate from "@/middleware/authenticate.middleware";
 import fileUploadMiddleware from '@/middleware/fileUpload.middleware'
 
+import reviewController from '@/resources/review/review.controller'
+import UpvoteController from "../upvote/upvote.controller";
+
+
 class ApartmentController implements Controller {
     public path = '/reviews'
     public router = Router({mergeParams: true})
     private ReviewService = new ReviewService()
+    
+    private upvoteRouter = new UpvoteController().router
+
 
     private app = express()
 
@@ -19,8 +26,9 @@ class ApartmentController implements Controller {
     }
 
     private initializeRouter(){
-
         this.app.use(`${this.path}`, this.router)
+
+        this.router.use(`${this.path}/:review_id/upvotes`, this.upvoteRouter)
 
         this.router.route(`/`)
         .post(fileUploadMiddleware.uploadFiles, fileUploadMiddleware.addFileToReqBody, authenticate, validationMiddleware(validate.create), this.create)

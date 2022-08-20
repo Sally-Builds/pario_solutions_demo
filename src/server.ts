@@ -7,6 +7,7 @@ import App from './app';
 import UserController from '@/resources/user/user.controller';
 import ApartmentController from '@/resources/apartment/apartment.controller'
 import ReviewController from '@/resources/review/review.controller'
+import UpvoteController from '@/resources/upvote/upvote.controller'
 
 validateEnv();
 
@@ -14,7 +15,8 @@ const app = new App(
     [
         new UserController(),
         new ApartmentController(),
-        new ReviewController()
+        new UpvoteController(),
+        new ReviewController(),
     ],
     Number(process.env.PORT)
 );

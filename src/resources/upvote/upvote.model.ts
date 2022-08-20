@@ -10,6 +10,11 @@ const upvoteSchema = new Schema<Upvote> ({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+    review: {
+        type: Schema.Types.ObjectId,
+        ref: 'Review',
+        required: [true, 'upvote must have a review it is associated with.']
+    },
 })
 
 export default model('Upvote', upvoteSchema)
