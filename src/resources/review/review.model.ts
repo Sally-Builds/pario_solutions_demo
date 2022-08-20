@@ -12,7 +12,7 @@ const reviewSchema = new Schema<Review> ({
     videos: {
         type: [String],
     },
-    upVote: {
+    upvote: {
         type: Number,
         default: 0,
     },
