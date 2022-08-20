@@ -24,6 +24,7 @@ const apartmentSchema = new Schema<Apartment> ({
     },
     country: {
         type: String,
+        required: [true, 'Apartment country is required.']
     },
     user: {
         type: Schema.Types.ObjectId,

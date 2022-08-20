@@ -23,6 +23,7 @@ const apartmentSchema = new mongoose_1.Schema({
     },
     country: {
         type: String,
+        required: [true, 'Apartment country is required.']
     },
     user: {
         type: mongoose_1.Schema.Types.ObjectId,
