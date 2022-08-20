@@ -22,14 +22,19 @@ class ApartmentController implements Controller {
 
     private initializeRouter(){
 
-        this.router.use(`${this.path}/:apartment_id/reviews`, this.reviewRouter)
+        this.router.get(`${this.path}/me`, authenticate, this.getMyApartments)
 
         this.router.route(`${this.path}`)
         .post(authenticate, validationMiddleware(validate.create), this.create)
         .get(this.getApartments)
 
+
         this.router.route(`${this.path}/:id`)
         .get(this.getApartment)
+        .patch(authenticate, this.updateApartment)
+        .delete(authenticate, this.deleteApartment)
+
+        this.router.use(`${this.path}/:apartment_id/reviews`, this.reviewRouter)
     }
 
     private create = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
@@ -49,9 +54,23 @@ class ApartmentController implements Controller {
 
     private getApartments = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         try {
-            const apartments = await this.ApartmentService.getAll()
+            const apartments = await this.ApartmentService.getAll({})
 
-            res.status(201).json({
+            res.status(200).json({
+                status: 'success',
+                result: (apartments as any).length,
+                apartments,
+            })
+        } catch (error:any) {
+           next(new HttpException(error.message, error.statusCode))
+        }
+    }
+
+    private getMyApartments = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+        try {
+            const apartments = await this.ApartmentService.getAll({user: req.user.id})
+
+            res.status(200).json({
                 status: 'success',
                 result: (apartments as any).length,
                 apartments,
@@ -65,7 +84,33 @@ class ApartmentController implements Controller {
         try {
             const apartment = await this.ApartmentService.get(req.params.id)
 
-            res.status(201).json({
+            res.status(200).json({
+                status: 'success',
+                apartment,
+            })
+        } catch (error:any) {
+           next(new HttpException(error.message, error.statusCode))
+        }
+    }
+
+    private updateApartment = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+        try {
+            const apartment = await this.ApartmentService.update(req.params.id, req.user.id, req.body)
+
+            res.status(200).json({
+                status: 'success',
+                apartment,
+            })
+        } catch (error:any) {
+           next(new HttpException(error.message, error.statusCode))
+        }
+    }
+
+    private deleteApartment = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+        try {
+            const apartment = await this.ApartmentService.delete(req.params.id, req.user.id, req.body)
+
+            res.status(204).json({
                 status: 'success',
                 apartment,
             })

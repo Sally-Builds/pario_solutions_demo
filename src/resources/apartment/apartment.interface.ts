@@ -8,8 +8,6 @@ export default interface Apartment extends Document {
     state: string,
     postalCode: number,
     country: string,
-    // longitude: string,
-    // latitude: string,
     user: ObjectId,
-    // location: Geolocation
+    review: ObjectId,
 }

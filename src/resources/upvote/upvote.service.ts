@@ -15,6 +15,17 @@ class UpvoteService {
      */
     public async create (data: Upvote): Promise<Upvote | Error> {
         try {
+            let check:any
+            if(data.user) {
+                check = await this.UpvoteModel.findOne({user: data.user})
+                
+            }else {
+                check = await (this as any).UpvoteModel.findOne(data)
+            }
+
+            if(check) {
+                throw new Error("you've already reacted to this review");
+            }
             const upvote = await this.UpvoteModel.create(data)
 
             return upvote

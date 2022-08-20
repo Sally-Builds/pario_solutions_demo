@@ -52,4 +52,15 @@ upvoteSchema.post(/^findOneAnd/, async function (doc, next) {
     next()
 });
 
+upvoteSchema.pre('save', async function(next): Promise<void> {
+    try {
+        const data = await reviewModel.findById((this as any).review)
+        if(!data) {
+            throw new Error('review not found')
+        }
+    } catch (error) {
+        throw new Error('review not found')
+    }
+})
+
 export default model('Upvote', upvoteSchema)
