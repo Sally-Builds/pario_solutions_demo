@@ -5,6 +5,7 @@ import HttpException from "@/utils/exceptions/httpExceptions";
 import validationMiddleware from "@/middleware/validation.middleware";
 import validate from './user.validation'
 import authenticate from "@/middleware/authenticate.middleware";
+import CookieOption from "@/utils/interfaces/cookieOption.interface";
 
 class UserController implements Controller {
     public path = '/users'
@@ -19,6 +20,7 @@ class UserController implements Controller {
     private initializeRouter(){
         this.router.post(`${this.path}/signup`, validationMiddleware(validate.create), this.signup)
         this.router.post(`${this.path}/login`, validationMiddleware(validate.login), this.login)
+        this.router.get(`${this.path}/logout`, authenticate, this.logout)
 
         this.router.route(`${this.path}`)
         .get(authenticate, this.getUser)
@@ -30,6 +32,15 @@ class UserController implements Controller {
     private signup = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         try {
             const {user, token}:any = await this.userService.create(req.body)
+
+            const cookieOptions:CookieOption = {
+                expires: new Date(
+                  Date.now() + Number(process.env.JWT_COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000
+                ),
+              };
+              if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+            
+              res.cookie('jwt', token, cookieOptions);
 
             res.status(201).json({
                 status: 'success',
@@ -45,6 +56,15 @@ class UserController implements Controller {
         try {
             const {user, token}:any = await this.userService.login(req.body.email, req.body.password)
 
+            const cookieOptions:CookieOption = {
+                expires: new Date(
+                  Date.now() + Number(process.env.JWT_COOKIE_EXPIRES_IN) * 24 * 60 * 60 * 1000
+                ),
+              };
+              if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+            
+              res.cookie('jwt', token, cookieOptions);
+
             res.status(200).json({
                 status: 'success',
                 token,
@@ -53,6 +73,14 @@ class UserController implements Controller {
         } catch (error:any) {
             next(new HttpException(error.message, error.statusCode))
         }
+    }
+
+    private logout = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
+        res.cookie('jwt', {
+            expires: new Date(Date.now() + 10 * 1000),
+            httpOnly: true,
+          });
+          res.status(200).json({ status: 'success' });
     }
 
     private getUser = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {

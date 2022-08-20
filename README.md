@@ -45,19 +45,25 @@ A demo API for pario solutions
         -   **response**
             ```json
                 {
-                "status": "success",
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDE0ZWRhNWMzZTNkYzkzZjFjNjRiYiIsImlhdCI6MTY2MTAzMDEwNywiZXhwIjoxNjYzNjIyMTA3fQ.I8YN5RVAi_GVetj3E_rQuuaegftx_PQrXhUVgtxJRrg",
-                "user": {
-                "name": "Joshua",
-                "email": "uzoagulujoshua@yahoo.com",
-                "role": "user",
-                "_id": "63014eda5c3e3dc93f1c64bb",
-                "createdAt": "2022-08-20T21:15:06.968Z",
-                "updatedAt": "2022-08-20T21:15:06.968Z",
-                "__v": 0
-                }
+                    "status": "success",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDE0ZWRhNWMzZTNkYzkzZjFjNjRiYiIsImlhdCI6MTY2MTAzMDEwNywiZXhwIjoxNjYzNjIyMTA3fQ.I8YN5RVAi_GVetj3E_rQuuaegftx_PQrXhUVgtxJRrg",
+                    "user": {
+                    "name": "Joshua",
+                    "email": "uzoagulujoshua@yahoo.com",
+                    "role": "user",
+                    "_id": "63014eda5c3e3dc93f1c64bb",
+                    "createdAt": "2022-08-20T21:15:06.968Z",
+                    "updatedAt": "2022-08-20T21:15:06.968Z",
+                    "__v": 0
+                    }
                 }
             ```
+    *   **Logout** - /api/users/logout  - GET
+        -   **response (cookies logout)**
+            ```json
+                {
+                    "status": "success",
+                }
 
 2)  ## **Apartment**
     *   **add apartment** - /api/apartments  - POST

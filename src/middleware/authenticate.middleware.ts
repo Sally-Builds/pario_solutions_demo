@@ -7,11 +7,21 @@ import HttpException from '@/utils/exceptions/httpExceptions'
 
 async function authenticate (req:Request, res:Response, next:NextFunction): Promise<Response | void> {
     const bearer = req.headers.authorization
+    console.log(req.cookies)
+    let accessToken
+    if (
+        bearer &&
+        bearer.startsWith('Bearer')
+      ) {
+        accessToken = bearer.split(' ')[1].trim();
+      } else if (req.cookies.jwt) {
+        accessToken = req.cookies.jwt;
+      }
 
-    if(!bearer || !bearer.startsWith('Bearer')){
+    if(!accessToken){
         return next(new HttpException('Unauthorized access', 401))
     }
-    const accessToken = bearer.split('Bearer ')[1].trim()
+    // accessToken = bearer.split('Bearer ')[1].trim()
     try {
         const payload: Token | jwt.JsonWebTokenError = await verifyToken(accessToken)
 
