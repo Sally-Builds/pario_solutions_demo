@@ -3,7 +3,7 @@ A demo API for pario solutions
 
 
 ## API ERD
-![Pent API ERD](pari_solutions.jpg)
+![Pent API ERD](pari_solutions.jpg "pari_solutions")
 
 
 ## API endpoints documentation
@@ -57,7 +57,7 @@ A demo API for pario solutions
                 "__v": 0
                 }
                 }
-                ```
+            ```
 
 2)  ## **Apartment**
     *   **add apartment** - /api/apartments  - POST
@@ -197,8 +197,8 @@ A demo API for pario solutions
             ```json
                 {
                     "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-                    "images": "["image1.png", "image2.png"]",
-                    "videos": "["vid1.mp4", "vid2.mp4"]",
+                    "images": "['image_83878299020.png', 'image_09877286748.png']",
+                    "videos": "['video_02983828910.mp4', 'video_93893928829.mp4']",
                 }
             ```
         -   **response**
