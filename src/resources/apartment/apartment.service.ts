@@ -1,6 +1,5 @@
 import apartmentModel from "./apartment.model";
 import Apartment from "./apartment.interface";
-import {createToken} from '@/utils/token'
 import HttpException from "@/utils/exceptions/httpExceptions";
 
 
