@@ -19,7 +19,7 @@ const userSchema = new Schema<User> ({
     },
     role: {
         type: String,
-        enum: ['user', 'virtual assistant', 'admin'],
+        enum: ['user', 'admin'],
         default: 'user', 
     },
 }, {
