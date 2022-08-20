@@ -1,3 +1,4 @@
+const path = require('path');
 import fs from 'fs'
 import express, { Application } from 'express';
 import { connect } from 'mongoose';
@@ -33,6 +34,9 @@ class App {
         this.app.use(bodyParser.json());
 
         this.app.use(bodyParser.urlencoded({ extended: true }));
+
+        //serving static files
+        this.app.use('/uploads', express.static(path.join(__dirname, '../public')));
     }
 
     private initializeControllers(controllers: Controller[]) {
