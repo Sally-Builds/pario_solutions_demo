@@ -5,18 +5,25 @@ import HttpException from "@/utils/exceptions/httpExceptions";
 import validationMiddleware from "@/middleware/validation.middleware";
 import validate from './apartment.validation'
 import authenticate from "@/middleware/authenticate.middleware";
-import Apartment from "./apartment.interface";
+
+
+import reviewController from '@/resources/review/review.controller'
 
 class ApartmentController implements Controller {
     public path = '/apartments'
     public router = Router()
     private ApartmentService = new ApartmentService()
 
+    private reviewRouter = new reviewController().router
+
     constructor(){
         this.initializeRouter()
     }
 
     private initializeRouter(){
+
+        this.router.use(`${this.path}/:apartment_id/reviews`, this.reviewRouter)
+
         this.router.route(`${this.path}`)
         .post(authenticate, validationMiddleware(validate.create), this.create)
         .get(this.getApartments)
