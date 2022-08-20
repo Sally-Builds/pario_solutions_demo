@@ -15,6 +15,7 @@ class UpvoteService {
      */
     public async create (data: Upvote): Promise<Upvote | Error> {
         try {
+            console.log(data)
             let check:any
             if(data.user) {
                 check = await this.UpvoteModel.findOne({user: data.user})

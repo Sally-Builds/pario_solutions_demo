@@ -24,6 +24,7 @@ class UpvoteController implements Controller {
 
     private create = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         try {
+            console.log(req.user)
             //add the req.ip to the req body
             req.body.ipAddress = req.ip
             //add the req.user to the req body, if user is logged in
