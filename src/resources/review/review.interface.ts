@@ -3,8 +3,8 @@ import { Document, ObjectId } from "mongoose";
 
 export default interface Review extends Document {
     comment: string,
-    image: string,
-    video: string,
+    images: string[],
+    videos: string[],
     upVote: number,
     user: ObjectId,
     apartment: ObjectId

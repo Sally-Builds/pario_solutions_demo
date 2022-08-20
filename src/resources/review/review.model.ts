@@ -6,11 +6,11 @@ const reviewSchema = new Schema<Review> ({
         type: String,
         required: [true, 'comment or review is required.']
     },
-    image: {
-        type: String,
+    images: {
+        type: [String],
     },
-    video: {
-        type: String,
+    videos: {
+        type: [String],
     },
     upVote: {
         type: Number,
