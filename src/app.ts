@@ -40,6 +40,9 @@ class App {
     }
 
     private initializeControllers(controllers: Controller[]) {
+        this.app.get("/", (req, res) => {
+            res.send("Pent API demo")
+          })
         controllers.map((controller: Controller) => {
             this.app.use('/api', controller.router);
         });
