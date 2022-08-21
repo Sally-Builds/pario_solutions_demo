@@ -54,7 +54,7 @@ class ApartmentController implements Controller {
 
     private getApartments = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         try {
-            const apartments = await this.ApartmentService.getAll({})
+            const apartments = await this.ApartmentService.getAll({}, req.query)
 
             res.status(200).json({
                 status: 'success',
@@ -68,7 +68,7 @@ class ApartmentController implements Controller {
 
     private getMyApartments = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
         try {
-            const apartments = await this.ApartmentService.getAll({user: req.user.id})
+            const apartments = await this.ApartmentService.getAll({user: req.user.id}, req.query)
 
             res.status(200).json({
                 status: 'success',

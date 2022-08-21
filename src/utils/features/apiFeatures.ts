@@ -1,5 +1,5 @@
 class APIFeatures {
-    private query
+    public query
     private queryString
     constructor(query:any, queryString:any) {
       this.query = query;
@@ -25,7 +25,8 @@ class APIFeatures {
     sort() {
       if (this.queryString.sort) {
         const sortBy = this.queryString.sort.split(',').join(' ');
-        this.query = this.query.sort(sortBy);
+        console.log(sortBy)
+        this.query = this.query.sort({'upvote': 1});
       } else {
         this.query = this.query.sort('-createdAt');
       }

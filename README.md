@@ -98,6 +98,7 @@ A demo API for pario solutions
                 }
             ```
     *   **get all apartments** - /api/apartments  - GET
+        -   **sort** /api/apartments?sort=createdAt
         -   **response**
             ```json
                 {
@@ -119,6 +120,7 @@ A demo API for pario solutions
                 }
             ```
     *   **get all apartments created by the authenticated user** - /api/apartments/me  - GET
+        -   **sort** /api/apartments/me?sort=createdAt
         -   **response**
             ```json
                 {

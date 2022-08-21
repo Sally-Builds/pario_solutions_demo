@@ -1,6 +1,7 @@
 import apartmentModel from "./apartment.model";
 import Apartment from "./apartment.interface";
 import HttpException from "@/utils/exceptions/httpExceptions";
+import APIFeatures from "@/utils/features/apiFeatures";
 
 
 class ApartmentService {
@@ -22,10 +23,18 @@ class ApartmentService {
         }
     }
    
-    public async getAll (data: any): Promise<Apartment[] | Error> {
+    public async getAll (data: any, query:any): Promise<Apartment[] | Error> {
         try {
-            console.log(data)
-            const apartments = await this.ApartmentModel.find(data)
+            const features = new APIFeatures(
+                this.ApartmentModel.find(data),
+                query
+              )
+            .filter()
+            .sort()
+            .limitFields()
+            .paginate();
+
+              const apartments = await features.query;
 
             return apartments
         } catch (error:any) {

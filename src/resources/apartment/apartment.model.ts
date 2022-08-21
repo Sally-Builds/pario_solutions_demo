@@ -41,8 +41,13 @@ const apartmentSchema = new Schema<Apartment> ({
 {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
+    timestamps: true
 }
 )
+
+apartmentSchema.pre('find', function() {
+    this.populate('review');
+})
 
 apartmentSchema.post(/^findOneAnd/, async function(doc) {
     //clear review record
