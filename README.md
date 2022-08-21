@@ -5,6 +5,10 @@ A demo API for pario solutions
 ## API ERD
 ![Pent API ERD](pari_solutions.jpg "pari_solutions")
 
+
+## Live demo
+ [heroku demo server](https://pentapi.herokuapp.com/)
+
 ## Postman API documentation
 [Postman docs link](https://www.postman.com/s255y/workspace/pent-api/collection/6718885-3b30b457-0a4d-415d-9301-7b0583cdc746?action=share&creator=6718885)
 
